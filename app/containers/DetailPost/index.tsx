@@ -44,11 +44,11 @@ export default function DetailPost() {
   return (
     <Box>
       <Box mb="1rem">
-        <Text fontSize="0.7rem">Post By: {user.name} | @{user.username}</Text>
+        <Text fontSize="0.7rem">Post By: {user?.name} | @{user?.username}</Text>
       </Box>
       <Box mb="1.5rem">
-        <Heading mb="1rem" fontSize="1.5rem">{detailPost.title.toUpperCase()}</Heading>
-        <Text>{detailPost.body}</Text>
+        <Heading mb="1rem" fontSize="1.5rem">{detailPost?.title?.toUpperCase()}</Heading>
+        <Text>{detailPost?.body}</Text>
       </Box>
       <Comments comments={comments} />
     </Box>

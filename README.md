@@ -3,6 +3,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ## Petunjuk Penggunaan
 
 Untuk menjala aplikasi secara local bisa menggunakan perintah:
+- Clone / Download Project ini
+- jalankan perintah :
+```
+npm install
+# or
+yarn install
+```
 
 ```bash
 npm run dev
@@ -28,4 +35,4 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 ## Deploy on Vercel
 
-- [SosmedDashboard](https://sesmed-dashboard.vercel.app/)
+- [SosmedDashboard](https://sosmed-dashboard.vercel.app/)

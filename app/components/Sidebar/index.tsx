@@ -7,7 +7,7 @@ const Sidebar = () => {
   const router = useRouter()
   const { colorMode } = useColorMode()
   const { pathname } = router;
-  console.log(pathname)
+  
   return (
     <Box 
       position="fixed"

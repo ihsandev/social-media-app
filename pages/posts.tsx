@@ -1,13 +1,13 @@
 import { NextPage } from 'next';
-import { HomeContainer  } from '../app';
+import { PostsContainer  } from '../app';
 import Templates from '../app/templates';
 
-const Index: NextPage = () => {
+const Posts: NextPage = () => {
   return (
     <Templates>
-      <HomeContainer />
+      <PostsContainer />
     </Templates>
   )
 };
 
-export default Index;
+export default Posts;

@@ -21,7 +21,7 @@ interface IUser {
 
 export default function DetailPost() {
   const router = useRouter()
-  const { id }: any = router.query;
+  const id : any = router?.query?.id;
   const dispatch = useDispatch()
   
   useEffect(() => {

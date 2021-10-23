@@ -37,6 +37,12 @@ export interface IListPosts {
   body: string;
 }
 
+export interface IActionLoading {
+  type?: string; 
+  loading?: boolean;
+  loadingSubmit?: boolean;
+}
+
 export interface IActionPost { 
   type?: string; 
   posts?: IListPosts[];
@@ -96,4 +102,8 @@ export interface IActionComment {
   type?: string; 
   comment?: IComment[]
   newComment?: IPostComments
+}
+
+export interface ILoading {
+  loading: { loading: boolean, loadingSubmit: boolean; }
 }

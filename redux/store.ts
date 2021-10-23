@@ -5,12 +5,14 @@ import userReducer from './reducers/user'
 import postsReducer from './reducers/posts'
 import albumsReducer from './reducers/albums'
 import commentsReducer from './reducers/comments'
+import loadingReducer from './reducers/loading'
 
 const reducers = combineReducers({
   users: userReducer,
   posts: postsReducer,
   comments: commentsReducer,
-  albums: albumsReducer
+  albums: albumsReducer,
+  loading: loadingReducer
 })
 
 const sagaMiddleware = createSagaMiddleware()

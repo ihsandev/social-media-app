@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Box, Heading, Flex, Button, useDisclosure } from "@chakra-ui/react";
 import { ListView } from "../..";
 import { getPosts, setPosts } from '../../../redux/reducers/posts';
-import { IListPosts, IUserType } from '../../../utils/dataTypes';
+import { IListPosts, ILoading, IUserType } from '../../../utils/dataTypes';
 import { getUser } from '../../../redux/reducers/user';
 import AddPost from './partials/AddPost';
 import EditPost from './partials/EditPost';
+import { LoadingSpinner } from '../../components';
 
 
 interface IPosts {
-  posts: { posts: IListPosts[]}
+  posts: { posts: IListPosts[] }
 }
 
 interface IUser {
@@ -40,6 +41,7 @@ export default function PostsContainer() {
   
   const users = useSelector((state:IUser) => state.users.user)
   const posts = useSelector((state:IPosts) => state.posts.posts)
+  const loading = useSelector((state:ILoading) => state.loading.loading)
 
   const handleDelete = (postId: number) => {
     const newPosts : any = posts.filter(post => post.id !== postId)
@@ -63,7 +65,9 @@ export default function PostsContainer() {
         />}
       </Flex>
       <Box>
-        {posts && posts?.map(post =>
+        {
+        !loading ?
+        posts && posts?.map(post =>
           users && users.map(user => {
             if(post.userId === user.id) {
               return (
@@ -79,7 +83,7 @@ export default function PostsContainer() {
               )
             }
           })
-        )}
+        ): <LoadingSpinner message="Load Posts" />}
         <Flex justifyContent="flex-end">
           {start > 0 && (
             <Button onClick={handlePrev} mr="1rem" colorScheme="teal">Prev</Button>

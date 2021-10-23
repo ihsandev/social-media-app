@@ -47,7 +47,7 @@ export default function AddPost(props: IAddPost) {
   };
 
   const handleUpdateData = async (newData: IPostData) => {
-    await updatePost(newData, postId)
+    await updatePost(newData, postId)(dispatch)
       .then(res => {
           const formData : any = posts.map(post => {
             return Number(post.id) === Number(postId) ? res : post

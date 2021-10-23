@@ -6,21 +6,23 @@ import {
   FormLabel, 
   FormErrorMessage,
   Input,
-  Textarea ,
+  Textarea,
   Select,
+  Button,
   } from '@chakra-ui/react'
 import { useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form'
-import { IPostData, IUserType } from '../../../../utils/dataTypes';
+import { ILoading, IPostData, IUserType } from '../../../../utils/dataTypes';
 import { createPost } from '../../../../services/posts';
 import { ModalForm } from '../../../components';
+import { FiPlus } from 'react-icons/fi';
 
 interface IUser {
   users: { user: IUserType[] }
 }
 
 export default function AddPost() {
-  const { isOpen, onClose } = useDisclosure()
+  const { isOpen, onClose, onOpen } = useDisclosure()
   const dispatch = useDispatch()
   const {
     register,
@@ -41,6 +43,9 @@ export default function AddPost() {
 
   return (
     <>
+    <Button onClick={onOpen} colorScheme="teal" size="sm" leftIcon={<FiPlus />}>
+      Add Post
+    </Button>
     <ModalForm
       title="Add New Post"
       isOpen={isOpen}

@@ -9,6 +9,8 @@ import {
   ModalBody,
   ModalFooter,
   } from '@chakra-ui/react';
+import { ILoading } from '../../../utils/dataTypes';
+import { useSelector } from 'react-redux';
 
 interface IModalForm {
   onSubmit?: () => void;
@@ -20,6 +22,9 @@ interface IModalForm {
 
 export default function ModalForm(props: IModalForm) {
   const { children, title, onSubmit, isOpen, onClose } = props
+
+  const loading = useSelector((state:ILoading) => state.loading.loadingSubmit)
+
   return (
     <>
       <Modal
@@ -35,10 +40,10 @@ export default function ModalForm(props: IModalForm) {
              {children}
             </ModalBody>
             <ModalFooter>
-              <Button colorScheme="teal" mr={3} type="submit">
+              <Button colorScheme="teal" mr={3} type="submit" isLoading={loading}>
                 Save
               </Button>
-              <Button onClick={onClose}>Cancel</Button>
+              <Button isLoading={loading} onClick={onClose}>Cancel</Button>
             </ModalFooter>
           </form>
         </ModalContent>

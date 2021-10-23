@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, Table, Thead, Tr, Th, Tbody, Td, Heading} from '@chakra-ui/react'
+import { Box, Table, Thead, Tr, Th, Tbody, Td, Heading } from '@chakra-ui/react'
 import { getUser } from '../../../redux/reducers/user';
-import { IUserType } from '../../../utils/dataTypes';
+import { ILoading, IUserType } from '../../../utils/dataTypes';
+import { LoadingSpinner } from '../../components';
 
 interface IUser {
   users: { user: IUserType[]}
@@ -16,6 +17,7 @@ export default function UsersContainer() {
   },[dispatch])
   
   const users = useSelector((state:IUser) => state.users.user)
+  const loading = useSelector((state:ILoading) => state.loading.loading)
   
   return (
     <>
@@ -32,7 +34,7 @@ export default function UsersContainer() {
               </Tr>
             </Thead>
             <Tbody>
-              {users && users.map(user => {
+              {!loading ? users && users.map(user => {
                 return (
                   <Tr key={user.id}>
                     <Td>{user.name}</Td>
@@ -42,7 +44,7 @@ export default function UsersContainer() {
                     <Td>{user.address.street}</Td>
                   </Tr>
                 )
-              })}
+              }) : <LoadingSpinner message="Load Users" py="1rem" />}
           </Tbody>
         </Table>
       </Box>

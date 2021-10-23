@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import Link from 'next/link'
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Grid, Heading, Text } from "@chakra-ui/layout";
+import { Box, Grid, Heading, Text } from "@chakra-ui/react";
 import { getAlbums } from "../../../redux/reducers/albums";
-import { IDataAlbums, IUserType } from "../../../utils/dataTypes";
+import { IDataAlbums, ILoading, IUserType } from "../../../utils/dataTypes";
 import { getUser } from "../../../redux/reducers/user";
+import { LoadingSpinner } from "../..";
 
 interface IAlbums {
   albums: { albums: IDataAlbums}
@@ -28,6 +29,7 @@ export default function AlbumsContainer() {
   
   const users = useSelector((state:IUser) => state.users.user)
   const albums = useSelector((state: IAlbums) => state.albums.albums)
+  const loading = useSelector((state:ILoading) => state.loading.loading)
 
 
   return (
@@ -36,7 +38,7 @@ export default function AlbumsContainer() {
         <Grid 
           templateColumns={["1fr","repeat(2, 1fr)","repeat(3, 1fr)","repeat(4, 1fr)"]} 
           gap={4}>
-          {
+          { !loading ?
             albums && albums?.data?.map(album => 
               users && users?.map(user => {
                 if(user?.id === album.userId) {
@@ -62,7 +64,7 @@ export default function AlbumsContainer() {
                   )
                 }
               })
-            )
+            ) : <LoadingSpinner message="Load Albums" />
           }
         </Grid>
     </>

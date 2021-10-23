@@ -14,3 +14,10 @@ export function requestGetPost(id: number) {
     url: `${API.posts}/${id}`
   });
 }
+
+export function requestGetAllPosts() {
+  return axios.request({
+    method: "get",
+    url: API.posts
+  });
+}

@@ -1,13 +1,14 @@
-import { Box, Text, Flex, Button, Icon } from '@chakra-ui/react'
-import {FiMessageSquare, FiPlus } from 'react-icons/fi'
+import { Box, Text, Flex, Icon } from '@chakra-ui/react'
+import {FiMessageSquare } from 'react-icons/fi'
 import { useDisclosure } from '@chakra-ui/hooks'
 import { ListView } from '../../..'
-import { IComment } from '../../../../utils/dataTypes'
+import { IComment, ILoading } from '../../../../utils/dataTypes'
 import AddComment from './AddComment'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setComment } from '../../../../redux/reducers/comments'
 import EditComment from './EditComment'
 import { useState } from 'react'
+import { LoadingSpinner } from '../../../components'
 
 interface ListCommentType {
   comments: IComment[];
@@ -28,6 +29,8 @@ const Comments = ({comments}: ListCommentType) => {
     onOpen()
   }
 
+  const loading = useSelector((state:ILoading) => state.loading.loading)
+
   return (
     <>
     {isOpen && <EditComment 
@@ -43,7 +46,7 @@ const Comments = ({comments}: ListCommentType) => {
         </Flex>
       </Box>
       <Box px="1rem">
-        {
+        { !loading ?
           comments?.map(comment => {
             return (
               <ListView
@@ -56,7 +59,7 @@ const Comments = ({comments}: ListCommentType) => {
                 onEdit={() => handleEdit(comment.id)}
               />
             )
-          })
+          }) : <LoadingSpinner message="Load Comments" />
         }
       </Box>
     </Box>

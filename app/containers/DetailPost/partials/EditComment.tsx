@@ -46,7 +46,7 @@ export default function EditComment(
   };
 
   const handleUpdateData = async (newData: IPostComments) => {
-    await updateComment(newData, commentId)
+    await updateComment(newData, commentId)(dispatch)
       .then(res => {
           const formData : any = comments.map(comment => {
             return Number(comment.id) === Number(commentId) ? res : comment

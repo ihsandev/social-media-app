@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { Box, Grid, Heading, Image, Text, useDisclosure } from "@chakra-ui/react";
 import { getPhotos } from "../../../redux/reducers/albums";
-import { IListPhotos } from "../../../utils/dataTypes";
+import { IListPhotos, ILoading } from "../../../utils/dataTypes";
 import ModalPhoto from "./partials/ModalPhoto";
+import { LoadingSpinner } from "../..";
 
 interface IPhotos {
   albums: { photos: IListPhotos[]}
@@ -25,6 +26,7 @@ export default function PhotosContainer() {
   
   const photos = useSelector((state:IPhotos) => state.albums.photos)
   const filterPhotos = photos.filter(photo => Number(photo.albumId) === Number(id))
+  const loading = useSelector((state:ILoading) => state.loading.loading)
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -42,7 +44,7 @@ export default function PhotosContainer() {
           templateColumns={["repeat(2, 1fr)","repeat(3, 1fr)","repeat(4, 1fr)","repeat(5, 1fr)"]} 
           gap={4}
         >
-          {
+          { !loading ?
           filterPhotos.map(photo => {
             return (
               <Box key={photo.id} cursor="pointer" 
@@ -56,7 +58,7 @@ export default function PhotosContainer() {
                <Text fontSize="0.7rem">{photo.title}</Text>
               </Box>
             )
-          })
+          }) : <LoadingSpinner message="Load Photos" />
           }
         </Grid>
     </>

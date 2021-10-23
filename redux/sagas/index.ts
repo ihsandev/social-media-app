@@ -1,10 +1,12 @@
 import { takeLatest } from "redux-saga/effects";
 import { handleGetUser } from "./handlers/user";
-import { handleGetPosts, handleGetPost, handleGetComment} from "./handlers/posts";
+import { handleGetPosts, handleGetPost} from "./handlers/posts";
 import { handleGetAlbums, handleGetPhotos } from "./handlers/albums";
 import { GET_USER } from "../reducers/user";
-import { GET_POSTS, GET_POST, GET_COMMENT } from "../reducers/posts";
+import { GET_POSTS, GET_POST } from "../reducers/posts";
 import { GET_ALBUMS, GET_PHOTOS } from "../reducers/albums";
+import { GET_COMMENT } from "../reducers/comments";
+import { handleGetComment } from "./handlers/comments";
 
 export function* watcherSaga() {
   yield takeLatest(GET_USER, handleGetUser);

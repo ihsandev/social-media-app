@@ -4,10 +4,12 @@ import { watcherSaga } from './sagas'
 import userReducer from './reducers/user'
 import postsReducer from './reducers/posts'
 import albumsReducer from './reducers/albums'
+import commentsReducer from './reducers/comments'
 
 const reducers = combineReducers({
   users: userReducer,
   posts: postsReducer,
+  comments: commentsReducer,
   albums: albumsReducer
 })
 

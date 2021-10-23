@@ -1,14 +1,12 @@
-import { IListPosts, IActionPost, IComment } from "../../utils/dataTypes";
+import { IListPosts, IActionPost } from "../../utils/dataTypes";
 
 // GET TYPES
 export const GET_POSTS : any = "GET_POSTS";
 export const GET_POST : any = "GET_POST";
-export const GET_COMMENT : any = "GET_COMMENT";
 
 // SET TYPES
 const SET_POSTS = "SET_POSTS";
 const SET_POST = "SET_POST";
-const SET_COMMENT = "SET_COMMENT";
 const SET_NEW_POST = "SET_NEW_POST";
 const SET_EDIT_POST = "SET_EDIT_POST";
 
@@ -21,11 +19,6 @@ export const getPosts = (start: number) => ({
 export const getPost = (id: number) => ({
   type: GET_POST,
   id
-});
-
-export const getComment = (id: number) => ({
-  type: GET_COMMENT,
-  id,
 });
 
 // SET FUNCTION
@@ -49,16 +42,10 @@ export const setEditPost = (posts: IListPosts) => ({
   posts
 });
 
-export const setComment = (comment: IComment) => ({
-  type: SET_COMMENT,
-  comment
-});
-
 const initialState = {
   posts: [],
   post: {},
   newPost: {},
-  comment: []
 };
 
 const rootReducer = (state = initialState, action: IActionPost) => {
@@ -76,9 +63,6 @@ const rootReducer = (state = initialState, action: IActionPost) => {
         ...state, 
         posts: [ newPost,...state.posts ] 
       };
-    case SET_COMMENT:
-      const { comment } = action;
-      return { ...state, comment };
     default:
       return state;
   }

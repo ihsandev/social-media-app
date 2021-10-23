@@ -19,7 +19,7 @@ interface IUser {
 
 export default function PostsContainer() {
   const [start, setStart] = useState(0);
-  const [postId, setPostId] = useState<any>(null);
+  const [postId, setPostId] = useState<number>(0);
   const { isOpen, onOpen, onClose } = useDisclosure()
   const dispatch = useDispatch()
   

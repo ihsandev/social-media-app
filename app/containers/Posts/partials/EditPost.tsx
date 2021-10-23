@@ -1,18 +1,9 @@
-import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { 
-  Button, 
-  Modal,
-  ModalOverlay, 
-  ModalContent, 
-  ModalHeader, 
-  ModalCloseButton,
-  ModalBody, 
   FormControl,
   FormLabel, 
   FormErrorMessage,
   Input,
-  ModalFooter, 
   Textarea ,
   Select,
   } from '@chakra-ui/react'
@@ -21,6 +12,7 @@ import { useForm } from 'react-hook-form'
 import { IListPosts, IPostData, IUserType } from '../../../../utils/dataTypes';
 import { setEditPost } from '../../../../redux/reducers/posts';
 import { updatePost } from '../../../../services/posts';
+import { ModalForm } from '../../../components';
 
 interface IUser {
   users: { user: IUserType[] }
@@ -67,49 +59,36 @@ export default function AddPost(props: IAddPost) {
 
   return (
     <>
-      <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Add New Post</ModalHeader>
-          <ModalCloseButton />
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <ModalBody pb={6}>
-              <FormControl isInvalid={errors.userId}>
-                <FormLabel>User</FormLabel>
-                <Select {...register("userId", {required: true, value: post?.userId})} placeholder="Select User">
-                  {users && users.map(user => {
-                    return (
-                      <option key={user.id} value={user.id}>{user.name} | @{user.username}</option>
-                    )
-                  })}
-                </Select>
-                <FormErrorMessage>{errors.userId && <p>User is required</p>}</FormErrorMessage>
-              </FormControl>
+    <ModalForm
+      title="Edit Post"
+      isOpen={isOpen}
+      onClose={onClose}
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <FormControl isInvalid={errors.userId}>
+        <FormLabel>User</FormLabel>
+        <Select {...register("userId", {required: true, value: post?.userId})} placeholder="Select User">
+          {users && users.map(user => {
+            return (
+              <option key={user.id} value={user.id}>{user.name} | @{user.username}</option>
+            )
+          })}
+        </Select>
+        <FormErrorMessage>{errors.userId && <p>User is required</p>}</FormErrorMessage>
+      </FormControl>
 
-              <FormControl mt={4} isInvalid={errors.title}>
-                <FormLabel>Title</FormLabel>
-                <Input {...register("title", { required: true, value: post?.title })} placeholder="Title Post" />
-                <FormErrorMessage>{errors.title && <p>Title is required</p>}</FormErrorMessage>  
-              </FormControl>
+      <FormControl mt={4} isInvalid={errors.title}>
+        <FormLabel>Title</FormLabel>
+        <Input {...register("title", { required: true, value: post?.title })} placeholder="Title Post" />
+        <FormErrorMessage>{errors.title && <p>Title is required</p>}</FormErrorMessage>  
+      </FormControl>
 
-              <FormControl mt={4} isInvalid={errors.body}>
-                <FormLabel>Content</FormLabel>
-                <Textarea {...register("body", { required: true, value: post?.body })} placeholder="Type Your Body Content here.." />
-                <FormErrorMessage>{errors.body && <p>Content is required</p>}</FormErrorMessage>
-              </FormControl>
-            </ModalBody>
-            <ModalFooter>
-              <Button colorScheme="teal" mr={3} type="submit">
-                Save
-              </Button>
-              <Button onClick={onClose}>Cancel</Button>
-            </ModalFooter>
-          </form>
-        </ModalContent>
-      </Modal>
+      <FormControl mt={4} isInvalid={errors.body}>
+        <FormLabel>Content</FormLabel>
+        <Textarea {...register("body", { required: true, value: post?.body })} placeholder="Type Your Body Content here.." />
+        <FormErrorMessage>{errors.body && <p>Content is required</p>}</FormErrorMessage>
+      </FormControl>
+    </ModalForm>
     </>
   )
 }

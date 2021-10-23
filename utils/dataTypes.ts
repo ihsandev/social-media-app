@@ -37,21 +37,12 @@ export interface IListPosts {
   body: string;
 }
 
-export interface IComment {
-  postId: number;
-  id: number;
-  name: string;
-  email: string;
-  body: string;
-}
-
 export interface IActionPost { 
   type?: string; 
   posts?: IListPosts[];
   start?: number;
   post?: IListPosts;
   id?: number;
-  comment?: IComment[]
   newPost?: IListPosts;
 }
 
@@ -85,4 +76,24 @@ export interface IListPhotos {
   title: string;
   url: string;
   thumbnailUrl: string;
+}
+
+export interface IComment {
+  postId: number;
+  id: number;
+  name: string;
+  email: string;
+  body: string;
+}
+export interface IPostComments {
+  id: number;
+  name: string;
+  email: string;
+  body: string;
+  postId: number;
+}
+export interface IActionComment {
+  type?: string; 
+  comment?: IComment[]
+  newComment?: IPostComments
 }

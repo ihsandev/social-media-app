@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { setEditPost, setNewPost } from '../../redux/reducers/posts';
+import { setNewPost } from '../../redux/reducers/posts';
 import { IListPosts, IPostData } from '../../utils/dataTypes';
 import API from '../../utils/endpoint';
 
